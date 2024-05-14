@@ -1,0 +1,7 @@
+W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.csproj.AssemblyReference.cache
+W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.GeneratedMSBuildEditorConfig.editorconfig
+W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.AssemblyInfoInputs.cache
+W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.AssemblyInfo.cs
+W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.csproj.CoreCompileInputs.cache
+W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.MvcApplicationPartsAssemblyInfo.cs
+W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.MvcApplicationPartsAssemblyInfo.cache
