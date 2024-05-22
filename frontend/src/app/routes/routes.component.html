@@ -1,0 +1,34 @@
+<div class="w-screen">
+    <div class="mt-32 mx-auto w-1/3 max-h-[700px] overflow-y-scroll">
+        <h1 class="text-center text-3xl font-bold">Список прогулочных маршрутов</h1>
+        <div class="border-2 p-4">
+          <h1 class="text-xl">Поиск</h1>
+          <div class="flex flex-row space-x-2 text-lg">
+            <input placeholder="Поиск по названию" type="text" name="" id="" class=" h-10 w-52 border border-red-950 rounded-lg p-1">
+            <select name="" id="" class=" h-10 w-52 border border-red-950 rounded-lg p-2">
+              <option value="all">Все</option>
+              <option value="free">Бесплатные</option>
+              <option value="paid">Платные</option>
+            </select>
+          </div>
+          <h1 class="text-xl">Сортировка</h1>
+          <div class="flex flex-row space-x-2 text-lg">
+            <select name="" id="" class=" h-10 w-52 border border-red-950 rounded-lg p-2">
+              <option value="asc">По возрастанию продолжительности</option>
+              <option value="desc">По убыванию продолжительности</option>
+            </select>
+          </div>
+        </div>
+        <div class=" space-y-1">
+        <div *ngFor="let rot of list" class="border rounded-lg border-black p-4 flex flex-row">
+          <div>
+          <p>Название : {{rot.name}}</p>
+          <p *ngIf="rot.paid">Платный</p>
+          <p *ngIf="!rot.paid">Бесплатный</p>
+          <p>Продолжительность : {{rot.during}}</p>
+        </div>
+          <button class=" rounded-lg h-14 my-auto ml-auto bg-yellow-400 p-4">Начать</button>
+        </div>
+      </div>
+    </div>
+</div>
