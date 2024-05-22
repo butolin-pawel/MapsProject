@@ -83,8 +83,8 @@ namespace maps.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateOnly>("dateofcreation")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("dateofcreation")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("description")
                         .IsRequired()
@@ -118,8 +118,8 @@ namespace maps.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("time")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("id");
 

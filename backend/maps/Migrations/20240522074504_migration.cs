@@ -32,7 +32,7 @@ namespace maps.Migrations
                     name = table.Column<string>(type: "text", nullable: false),
                     adress = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    dateofcreation = table.Column<DateOnly>(type: "date", nullable: false)
+                    dateofcreation = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +48,7 @@ namespace maps.Migrations
                     name = table.Column<string>(type: "text", nullable: false),
                     length = table.Column<int>(type: "integer", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    time = table.Column<TimeOnly>(type: "time without time zone", nullable: false)
+                    time = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {

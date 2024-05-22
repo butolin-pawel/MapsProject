@@ -9,7 +9,7 @@ namespace maps.Models
         public string name { get; set; }
         public int length { get; set; }
         public string description { get; set; }
-        public TimeOnly time { get; set; }
+        public DateTime time { get; set; }
         public route()
         {
             feedbacks = new List<feedback>();

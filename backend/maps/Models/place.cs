@@ -9,7 +9,7 @@ namespace maps.Models
         public string name { get; set; }
         public string adress { get; set; }
         public string description { get; set; }
-        public DateOnly dateofcreation { get; set; }
+        public DateTime dateofcreation { get; set; }
         public place()
         {
             routes = new List<route>();

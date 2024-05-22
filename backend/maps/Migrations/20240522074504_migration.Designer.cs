@@ -12,7 +12,7 @@ using maps.Models;
 namespace maps.Migrations
 {
     [DbContext(typeof(context))]
-    [Migration("20240515094633_migration")]
+    [Migration("20240522074504_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,8 +85,8 @@ namespace maps.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateOnly>("dateofcreation")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("dateofcreation")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("description")
                         .IsRequired()
@@ -120,8 +120,8 @@ namespace maps.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<TimeOnly>("time")
-                        .HasColumnType("time without time zone");
+                    b.Property<DateTime>("time")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("id");
 
