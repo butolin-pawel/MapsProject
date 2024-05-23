@@ -10,14 +10,13 @@ namespace maps.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        string connectionString = "Server=127.0.0.1;Port=5432;Database=K;User Id=postgres;Password=123;";
         [HttpGet]
         public JsonResult Get()
         {
             string query = @"select id, name, city from users";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
@@ -37,7 +36,7 @@ namespace maps.Controllers
             string query = @"insert into users (name, city) values (@name, @city)";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
@@ -59,7 +58,7 @@ namespace maps.Controllers
             string query = @"update users set name= @name, city= @city where id=@id";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
@@ -82,7 +81,7 @@ namespace maps.Controllers
             string query = @"delete from users where id=@id";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))

@@ -10,29 +10,31 @@ namespace maps.Controllers
     [ApiController]
     public class RouteController : ControllerBase
     {
-        string connectionString = "Server=127.0.0.1;Port=5432;Database=K;User Id=postgres;Password=123;";
-
+        private context context;
+        public RouteController()
+        {
+            context = new context(); 
+        }
         //Получение всех маршрутов
         //Пример Request body (просто api c get curl -X 'GET' \ 'https://localhost:????/api/Route' \ -H 'accept: */*')
         //Response body [ {"id": 1, "name": "Проб", "length": 30, "description": "Проб", "time": "2020-05-22T12:49:39.488"} ]
         [HttpGet]
-        public JsonResult Get() 
+        public JsonResult Get()
         {
-            string query = @"select id, name, length, description, time from routes";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                var routes = context.routes.Select(r => new { r.id, r.name, r.length, r.description, r.time }).ToList();
+
+                var table = new DataTable();
+                table.Columns.Add("id", typeof(int));
+                table.Columns.Add("name", typeof(string));
+                table.Columns.Add("length", typeof(int)); 
+                table.Columns.Add("description", typeof(string));
+                table.Columns.Add("time", typeof(DateTime)); 
+
+                foreach (var route in routes)
                 {
-                    reader = command.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
+                    table.Rows.Add(route.id, route.name, route.length, route.description, route.time);
                 }
-                connection.Close();
-            }
-            return new JsonResult(table);
+                return new JsonResult(table);
         }
 
         //Добавление маршрута
@@ -41,25 +43,16 @@ namespace maps.Controllers
         [HttpPost]
         public JsonResult Post(route r)
         {
-            string query = @"insert into routes (name, length, description, time) values (@name, @length, @description, @time)";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
+                var newRoute = new route
                 {
-                    myCommand.Parameters.AddWithValue("@name", r.name);
-                    myCommand.Parameters.AddWithValue("@length", r.length);
-                    myCommand.Parameters.AddWithValue("@description", r.description);
-                    myCommand.Parameters.AddWithValue("@time", r.time);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
-            }
-            return new JsonResult("Added Successfully");
+                    name = r.name,
+                    length = r.length,
+                    description = r.description,
+                    time = r.time
+                };
+                context.routes.Add(newRoute);
+                context.SaveChanges();
+                return new JsonResult("Added Successfully");
         }
 
         //Изменение маршрута
@@ -68,26 +61,20 @@ namespace maps.Controllers
         [HttpPut]
         public JsonResult Put(route r)
         {
-            string query = @"update routes set name= @name, length= @length, description= @description, time= @time  where id=@id";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
+                var existingRoute = context.routes.FirstOrDefault(route => route.id == r.id);
+                if (existingRoute != null)
                 {
-                    myCommand.Parameters.AddWithValue("@id", r.id);
-                    myCommand.Parameters.AddWithValue("@name", r.name);
-                    myCommand.Parameters.AddWithValue("@length", r.length);
-                    myCommand.Parameters.AddWithValue("@description", r.description);
-                    myCommand.Parameters.AddWithValue("@time", r.time);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
+                    existingRoute.name = r.name;
+                    existingRoute.length = r.length;
+                    existingRoute.description = r.description;
+                    existingRoute.time = r.time;
+                    context.SaveChanges();
+                    return new JsonResult("Updated Successfully");
                 }
-                connection.Close();
-            }
-            return new JsonResult("Updated Successfully");
+                else
+                {
+                    return new JsonResult("Route not found");
+                }
         }
 
         //Удаление маршрута
@@ -96,22 +83,18 @@ namespace maps.Controllers
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
-            string query = @"delete from routes where id=@id";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
+                var routeToDelete = context.routes.FirstOrDefault(route => route.id == id);
+
+                if (routeToDelete != null)
                 {
-                    myCommand.Parameters.AddWithValue("@id", id);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
+                    context.routes.Remove(routeToDelete);
+                    context.SaveChanges();
+                    return new JsonResult("Deleted Successfully");
                 }
-                connection.Close();
-            }
-            return new JsonResult("Deleted Successfully");
+                else
+                {
+                    return new JsonResult("Route not found");
+                }
         }
     }
 }

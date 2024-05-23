@@ -10,8 +10,6 @@ namespace maps.Controllers
     [ApiController]
     public class PlaceController : ControllerBase
     {
-        string connectionString = "Server=127.0.0.1;Port=5432;Database=K;User Id=postgres;Password=123;";
-
         //Получение всех мест
         //Пример Request body (просто api c get curl -X 'GET' \ 'https://localhost:????/api/Place' \ -H 'accept: */*')
         //Response body [ {"id": 1, "name": "Проб", "adress": "Проб", "description": "Проб", "dateofcreation": "1996-05-22T13:38:20.314"} ]
@@ -21,7 +19,7 @@ namespace maps.Controllers
             string query = @"select id, name, adress, description, dateofcreation from places";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
@@ -44,7 +42,7 @@ namespace maps.Controllers
             string query = @"insert into places (name, adress, description, dateofcreation) values (@name, @adress, @description, @dateofcreation)";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
@@ -71,7 +69,7 @@ namespace maps.Controllers
             string query = @"update places set name= @name, adress= @adress, description= @description, dateofcreation= @dateofcreation  where id=@id";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
@@ -99,7 +97,7 @@ namespace maps.Controllers
             string query = @"delete from places where id=@id";
             DataTable table = new DataTable();
             NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
             {
                 connection.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
