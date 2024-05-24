@@ -9,27 +9,36 @@ namespace maps.Controllers
     [ApiController]
     public class FeedbackController : ControllerBase
     {
+        private context context;
+        public FeedbackController()
+        {
+            context = new context();
+        }
         //Получение всех отзывов с создателем и маршрутом
         //Пример Request body (просто api c get curl -X 'GET' \ 'https://localhost:????/api/Feedback' \ -H 'accept: */*')
         //Response body [ { "id": 1, "description": "Проб", "score": 0, "id1": 2, "name": "Петр", "city": "Киров", "id2": 1, "name1": "Проб", "length": 30, "description1": "Проб", "time": "2020-05-22T12:49:39.488" } ]
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select f.id, f.description, f.score, u.id, u.name, u.city, r.id, r.name, r.length, r.description, r.time from feedbacks f join users u ON f.userid = u.id join routes r ON  f.routeid = r.id ";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
-            {
-                connection.Open();
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                var feedbacksWithUsersAndRoutes = context.feedbacks.Join(context.users, f => f.userid,u => u.id, (f, u) => new { feedback = f, user = u }).Join(context.routes,fu => fu.feedback.routeid, r => r.id, (fu, r) => new { id = fu.feedback.id, description = fu.feedback.description, score = fu.feedback.score, id1 = fu.user.id, name = fu.user.name, city = fu.user.city, id2 = r.id, name1 = r.name, length = r.length, description1 = r.description, time = r.time}).ToList();
+                var table = new DataTable();
+                table.Columns.Add("id", typeof(int));
+                table.Columns.Add("description", typeof(string));
+                table.Columns.Add("score", typeof(int));
+                table.Columns.Add("id1", typeof(int));
+                table.Columns.Add("name", typeof(string));
+                table.Columns.Add("city", typeof(string));
+                table.Columns.Add("id2", typeof(int));
+                table.Columns.Add("name1", typeof(string));
+                table.Columns.Add("length", typeof(int));
+                table.Columns.Add("description1", typeof(string));
+                table.Columns.Add("time", typeof(DateTime));
+
+                foreach (var item in feedbacksWithUsersAndRoutes)
                 {
-                    reader = command.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
+                    table.Rows.Add(item.id, item.description, item.score, item.id1, item.name, item.city, item.id2, item.name1, item.length, item.description1, item.time);
                 }
-                connection.Close();
-            }
-            return new JsonResult(table);
+                return new JsonResult(table);
         }
 
         //Добавление отзыва
@@ -38,24 +47,15 @@ namespace maps.Controllers
         [HttpPost]
         public JsonResult Post(feedback f)
         {
-            string query = @"insert into feedbacks (description, score, userid, routeid) values (@description, @score, @userid, @routeid)";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
+            var newFeedback = new feedback
             {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
-                {
-                    myCommand.Parameters.AddWithValue("@description", f.description);
-                    myCommand.Parameters.AddWithValue("@score", f.score);
-                    myCommand.Parameters.AddWithValue("@userid", f.userid);
-                    myCommand.Parameters.AddWithValue("@routeid", f.routeid);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
-            }
+                description = f.description,
+                score = f.score,
+                userid = f.userid,
+                routeid = f.routeid
+            };
+            context.feedbacks.Add(newFeedback);
+            context.SaveChanges();
             return new JsonResult("Added Successfully");
         }
 
@@ -65,26 +65,20 @@ namespace maps.Controllers
         [HttpPut]
         public JsonResult Put(feedback f)
         {
-            string query = @"update feedbacks set description= @description, score= @score, userid= @userid, routeid= @routeid  where id=@id";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
+            var existingFeedback = context.feedbacks.FirstOrDefault(feedback => feedback.id == f.id);
+            if (existingFeedback != null)
             {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
-                {
-                    myCommand.Parameters.AddWithValue("@id", f.id);
-                    myCommand.Parameters.AddWithValue("@description", f.description);
-                    myCommand.Parameters.AddWithValue("@score", f.score);
-                    myCommand.Parameters.AddWithValue("@userid", f.userid);
-                    myCommand.Parameters.AddWithValue("@routeid", f.routeid);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
+                existingFeedback.description = f.description;
+                existingFeedback.score = f.score;
+                existingFeedback.userid = f.userid;
+                existingFeedback.routeid = f.routeid;
+                context.SaveChanges();
+                return new JsonResult("Updated Successfully");
             }
-            return new JsonResult("Updated Successfully");
+            else
+            {
+                return new JsonResult("Feedback not found");
+            }
         }
 
         //Удаление отзыва
@@ -93,22 +87,18 @@ namespace maps.Controllers
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
-            string query = @"delete from feedbacks where id=@id";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
+            var feedbackToDelete = context.feedbacks.FirstOrDefault(feedback => feedback.id == id);
+
+            if (feedbackToDelete != null)
             {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
-                {
-                    myCommand.Parameters.AddWithValue("@id", id);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
+                context.feedbacks.Remove(feedbackToDelete);
+                context.SaveChanges();
+                return new JsonResult("Deleted Successfully");
             }
-            return new JsonResult("Deleted Successfully");
+            else
+            {
+                return new JsonResult("Feedback not found");
+            }
         }
     }
 }

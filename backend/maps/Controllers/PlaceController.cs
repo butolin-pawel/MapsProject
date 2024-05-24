@@ -10,25 +10,29 @@ namespace maps.Controllers
     [ApiController]
     public class PlaceController : ControllerBase
     {
+        private context context;
+        public PlaceController()
+        {
+            context = new context();
+        }
         //Получение всех мест
         //Пример Request body (просто api c get curl -X 'GET' \ 'https://localhost:????/api/Place' \ -H 'accept: */*')
         //Response body [ {"id": 1, "name": "Проб", "adress": "Проб", "description": "Проб", "dateofcreation": "1996-05-22T13:38:20.314"} ]
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select id, name, adress, description, dateofcreation from places";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
+            var places = context.places.Select(p => new { p.id, p.name, p.adress, p.description, p.dateofcreation }).ToList();
+
+            var table = new DataTable();
+            table.Columns.Add("id", typeof(int));
+            table.Columns.Add("name", typeof(string));
+            table.Columns.Add("adress", typeof(string));
+            table.Columns.Add("description", typeof(string));
+            table.Columns.Add("dateofcreation", typeof(DateTime));
+
+            foreach (var place in places)
             {
-                connection.Open();
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                {
-                    reader = command.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
+                table.Rows.Add(place.id, place.name, place.adress, place.description, place.dateofcreation);
             }
             return new JsonResult(table);
         }
@@ -39,24 +43,15 @@ namespace maps.Controllers
         [HttpPost]
         public JsonResult Post(place p)
         {
-            string query = @"insert into places (name, adress, description, dateofcreation) values (@name, @adress, @description, @dateofcreation)";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
+            var newPlace = new place
             {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
-                {
-                    myCommand.Parameters.AddWithValue("@name", p.name);
-                    myCommand.Parameters.AddWithValue("@adress", p.adress);
-                    myCommand.Parameters.AddWithValue("@description", p.description);
-                    myCommand.Parameters.AddWithValue("@dateofcreation", p.dateofcreation);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
-            }
+                name = p.name,
+                adress = p.adress,
+                description = p.description,
+                dateofcreation = p.dateofcreation
+            };
+            context.places.Add(newPlace);
+            context.SaveChanges();
             return new JsonResult("Added Successfully");
         }
 
@@ -66,26 +61,20 @@ namespace maps.Controllers
         [HttpPut]
         public JsonResult Put(place p)
         {
-            string query = @"update places set name= @name, adress= @adress, description= @description, dateofcreation= @dateofcreation  where id=@id";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
+            var existingPlace = context.places.FirstOrDefault(place => place.id == p.id);
+            if (existingPlace != null)
             {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
-                {
-                    myCommand.Parameters.AddWithValue("@id", p.id);
-                    myCommand.Parameters.AddWithValue("@name", p.name);
-                    myCommand.Parameters.AddWithValue("@adress", p.adress);
-                    myCommand.Parameters.AddWithValue("@description", p.description);
-                    myCommand.Parameters.AddWithValue("@dateofcreation", p.dateofcreation);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
+                existingPlace.name = p.name;
+                existingPlace.adress = p.adress;
+                existingPlace.description = p.description;
+                existingPlace.dateofcreation = p.dateofcreation;
+                context.SaveChanges();
+                return new JsonResult("Updated Successfully");
             }
-            return new JsonResult("Updated Successfully");
+            else
+            {
+                return new JsonResult("Place not found");
+            }
         }
 
         //Удаление места
@@ -94,22 +83,18 @@ namespace maps.Controllers
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
-            string query = @"delete from places where id=@id";
-            DataTable table = new DataTable();
-            NpgsqlDataReader reader;
-            using (NpgsqlConnection connection = new NpgsqlConnection(context.connectionString))
+            var placeToDelete = context.places.FirstOrDefault(place => place.id == id);
+
+            if (placeToDelete != null)
             {
-                connection.Open();
-                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, connection))
-                {
-                    myCommand.Parameters.AddWithValue("@id", id);
-                    reader = myCommand.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-                }
-                connection.Close();
+                context.places.Remove(placeToDelete);
+                context.SaveChanges();
+                return new JsonResult("Deleted Successfully");
             }
-            return new JsonResult("Deleted Successfully");
+            else
+            {
+                return new JsonResult("Place not found");
+            }
         }
     }
 }
