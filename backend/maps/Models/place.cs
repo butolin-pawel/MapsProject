@@ -7,6 +7,8 @@ namespace maps.Models
         [Key]
         public int id { get; set; }
         public string name { get; set; }
+        public double longitude { get; set; }
+        public double latitude { get; set; }
         public string adress { get; set; }
         public string description { get; set; }
         public DateTime dateofcreation { get; set; }
