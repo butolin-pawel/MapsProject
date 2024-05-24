@@ -57,6 +57,7 @@ namespace maps.Controllers
             return new JsonResult("Added Successfully");
         }
 
+
         //Удаление места у маршрута
         //Пример Request body 1 (Просто передаешь id на нужное api при delete curl -X 'DELETE' \ 'https://localhost:????/api/RoutePlace/1' \ -H 'accept: */*')
         //Response body "Deleted Successfully"
