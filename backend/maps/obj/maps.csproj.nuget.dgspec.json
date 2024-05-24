@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "W:\\backend\\maps\\maps.csproj": {}
+    "W:\\K\\MapsProject\\backend\\maps\\maps.csproj": {}
   },
   "projects": {
-    "W:\\backend\\maps\\maps.csproj": {
+    "W:\\K\\MapsProject\\backend\\maps\\maps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\backend\\maps\\maps.csproj",
+        "projectUniqueName": "W:\\K\\MapsProject\\backend\\maps\\maps.csproj",
         "projectName": "maps",
-        "projectPath": "W:\\backend\\maps\\maps.csproj",
+        "projectPath": "W:\\K\\MapsProject\\backend\\maps\\maps.csproj",
         "packagesPath": "C:\\Users\\senya\\.nuget\\packages\\",
-        "outputPath": "W:\\backend\\maps\\obj\\",
+        "outputPath": "W:\\K\\MapsProject\\backend\\maps\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -67,6 +67,10 @@
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[6.0.1, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.10.0, )"
             },
             "Npgsql": {
               "target": "Package",

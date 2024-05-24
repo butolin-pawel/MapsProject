@@ -58,7 +58,7 @@ public class RouteControllerTests
     [TestMethod]
     public void TestDelete()
     {
-        int routeId = 1;
+        int routeId = 3;
         var result = _controller.Delete(routeId) as JsonResult;
         Assert.IsNotNull(result);
         Assert.AreEqual("Deleted Successfully", result.Value);
