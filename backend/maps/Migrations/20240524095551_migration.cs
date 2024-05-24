@@ -31,6 +31,8 @@ namespace maps.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "text", nullable: false),
                     adress = table.Column<string>(type: "text", nullable: false),
+                    longitude = table.Column<double>(type: "double precision", nullable: false),
+                    latitude = table.Column<double>(type: "double precision", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
                     dateofcreation = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -101,8 +103,8 @@ namespace maps.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     description = table.Column<string>(type: "text", nullable: false),
                     score = table.Column<int>(type: "integer", nullable: false),
-                    userid = table.Column<int>(type: "integer", nullable: false),
-                    routeid = table.Column<int>(type: "integer", nullable: false)
+                    userid = table.Column<int>(type: "integer", nullable: true),
+                    routeid = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,14 +113,12 @@ namespace maps.Migrations
                         name: "FK_feedbacks_routes_routeid",
                         column: x => x.routeid,
                         principalTable: "routes",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_feedbacks_users_userid",
                         column: x => x.userid,
                         principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(

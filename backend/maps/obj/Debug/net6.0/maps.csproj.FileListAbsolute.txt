@@ -89,95 +89,94 @@ W:\K\MapsProject\backend\maps\obj\Debug\net6.0\refint\maps.dll
 W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.pdb
 W:\K\MapsProject\backend\maps\obj\Debug\net6.0\maps.genruntimeconfig.cache
 W:\K\MapsProject\backend\maps\obj\Debug\net6.0\ref\maps.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\appsettings.Development.json
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\appsettings.json
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\maps.exe
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\maps.deps.json
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\maps.runtimeconfig.json
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\maps.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\maps.pdb
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Azure.Core.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Azure.Identity.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Humanizer.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Identity.Client.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.OpenApi.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Newtonsoft.Json.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Npgsql.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Drawing.Common.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Memory.Data.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Runtime.Caching.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Security.Permissions.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\System.Windows.Extensions.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\de\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\es\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\fr\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\it\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\ja\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\ko\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\ru\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.csproj.AssemblyReference.cache
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.GeneratedMSBuildEditorConfig.editorconfig
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.AssemblyInfoInputs.cache
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.AssemblyInfo.cs
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.csproj.CoreCompileInputs.cache
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.MvcApplicationPartsAssemblyInfo.cs
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.MvcApplicationPartsAssemblyInfo.cache
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.sourcelink.json
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\staticwebassets.build.json
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\staticwebassets.development.json
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.maps.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.build.maps.props
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.maps.props
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.maps.props
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\staticwebassets.pack.json
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\scopedcss\bundle\maps.styles.css
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.csproj.Up2Date
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\refint\maps.dll
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.pdb
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\maps.genruntimeconfig.cache
-C:\Клонированные репозитории\MapsProject\backend\maps\obj\Debug\net6.0\ref\maps.dll
+W:\backend\maps\bin\Debug\net6.0\appsettings.Development.json
+W:\backend\maps\bin\Debug\net6.0\appsettings.json
+W:\backend\maps\bin\Debug\net6.0\maps.exe
+W:\backend\maps\bin\Debug\net6.0\maps.deps.json
+W:\backend\maps\bin\Debug\net6.0\maps.runtimeconfig.json
+W:\backend\maps\bin\Debug\net6.0\maps.dll
+W:\backend\maps\bin\Debug\net6.0\maps.pdb
+W:\backend\maps\bin\Debug\net6.0\Azure.Core.dll
+W:\backend\maps\bin\Debug\net6.0\Azure.Identity.dll
+W:\backend\maps\bin\Debug\net6.0\Humanizer.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.OpenApi.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+W:\backend\maps\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+W:\backend\maps\bin\Debug\net6.0\Newtonsoft.Json.dll
+W:\backend\maps\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+W:\backend\maps\bin\Debug\net6.0\Npgsql.dll
+W:\backend\maps\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+W:\backend\maps\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+W:\backend\maps\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+W:\backend\maps\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+W:\backend\maps\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+W:\backend\maps\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+W:\backend\maps\bin\Debug\net6.0\System.Drawing.Common.dll
+W:\backend\maps\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+W:\backend\maps\bin\Debug\net6.0\System.Memory.Data.dll
+W:\backend\maps\bin\Debug\net6.0\System.Runtime.Caching.dll
+W:\backend\maps\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+W:\backend\maps\bin\Debug\net6.0\System.Security.Permissions.dll
+W:\backend\maps\bin\Debug\net6.0\System.Windows.Extensions.dll
+W:\backend\maps\bin\Debug\net6.0\de\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\es\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\fr\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\it\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\ja\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\ko\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\ru\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+W:\backend\maps\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+W:\backend\maps\obj\Debug\net6.0\maps.csproj.AssemblyReference.cache
+W:\backend\maps\obj\Debug\net6.0\maps.GeneratedMSBuildEditorConfig.editorconfig
+W:\backend\maps\obj\Debug\net6.0\maps.AssemblyInfoInputs.cache
+W:\backend\maps\obj\Debug\net6.0\maps.AssemblyInfo.cs
+W:\backend\maps\obj\Debug\net6.0\maps.csproj.CoreCompileInputs.cache
+W:\backend\maps\obj\Debug\net6.0\maps.MvcApplicationPartsAssemblyInfo.cs
+W:\backend\maps\obj\Debug\net6.0\maps.MvcApplicationPartsAssemblyInfo.cache
+W:\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.maps.Microsoft.AspNetCore.StaticWebAssets.props
+W:\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.build.maps.props
+W:\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.maps.props
+W:\backend\maps\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.maps.props
+W:\backend\maps\obj\Debug\net6.0\staticwebassets.pack.json
+W:\backend\maps\obj\Debug\net6.0\staticwebassets.build.json
+W:\backend\maps\obj\Debug\net6.0\staticwebassets.development.json
+W:\backend\maps\obj\Debug\net6.0\scopedcss\bundle\maps.styles.css
+W:\backend\maps\obj\Debug\net6.0\maps.csproj.CopyComplete
+W:\backend\maps\obj\Debug\net6.0\maps.dll
+W:\backend\maps\obj\Debug\net6.0\refint\maps.dll
+W:\backend\maps\obj\Debug\net6.0\maps.pdb
+W:\backend\maps\obj\Debug\net6.0\maps.genruntimeconfig.cache
+W:\backend\maps\obj\Debug\net6.0\ref\maps.dll

@@ -88,6 +88,12 @@ namespace maps.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<double>("latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("longitude")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");

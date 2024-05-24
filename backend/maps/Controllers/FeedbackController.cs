@@ -20,25 +20,25 @@ namespace maps.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-                var feedbacksWithUsersAndRoutes = context.feedbacks.Join(context.users, f => f.userid,u => u.id, (f, u) => new { feedback = f, user = u }).Join(context.routes,fu => fu.feedback.routeid, r => r.id, (fu, r) => new { id = fu.feedback.id, description = fu.feedback.description, score = fu.feedback.score, id1 = fu.user.id, name = fu.user.name, city = fu.user.city, id2 = r.id, name1 = r.name, length = r.length, description1 = r.description, time = r.time}).ToList();
-                var table = new DataTable();
-                table.Columns.Add("id", typeof(int));
-                table.Columns.Add("description", typeof(string));
-                table.Columns.Add("score", typeof(int));
-                table.Columns.Add("id1", typeof(int));
-                table.Columns.Add("name", typeof(string));
-                table.Columns.Add("city", typeof(string));
-                table.Columns.Add("id2", typeof(int));
-                table.Columns.Add("name1", typeof(string));
-                table.Columns.Add("length", typeof(int));
-                table.Columns.Add("description1", typeof(string));
-                table.Columns.Add("time", typeof(DateTime));
+            var feedbacksWithUsersAndRoutes = context.feedbacks.Join(context.users, f => f.userid, u => u.id, (f, u) => new { feedback = f, user = u }).Join(context.routes, fu => fu.feedback.routeid, r => r.id, (fu, r) => new { id = fu.feedback.id, description = fu.feedback.description, score = fu.feedback.score, id1 = fu.user.id, name = fu.user.name, city = fu.user.city, id2 = r.id, name1 = r.name, length = r.length, description1 = r.description, time = r.time }).ToList();
+            var table = new DataTable();
+            table.Columns.Add("id", typeof(int));
+            table.Columns.Add("description", typeof(string));
+            table.Columns.Add("score", typeof(int));
+            table.Columns.Add("id1", typeof(int));
+            table.Columns.Add("name", typeof(string));
+            table.Columns.Add("city", typeof(string));
+            table.Columns.Add("id2", typeof(int));
+            table.Columns.Add("name1", typeof(string));
+            table.Columns.Add("length", typeof(int));
+            table.Columns.Add("description1", typeof(string));
+            table.Columns.Add("time", typeof(DateTime));
 
-                foreach (var item in feedbacksWithUsersAndRoutes)
-                {
-                    table.Rows.Add(item.id, item.description, item.score, item.id1, item.name, item.city, item.id2, item.name1, item.length, item.description1, item.time);
-                }
-                return new JsonResult(table);
+            foreach (var item in feedbacksWithUsersAndRoutes)
+            {
+                table.Rows.Add(item.id, item.description, item.score, item.id1, item.name, item.city, item.id2, item.name1, item.length, item.description1, item.time);
+            }
+            return new JsonResult(table);
         }
 
         //Добавление отзыва

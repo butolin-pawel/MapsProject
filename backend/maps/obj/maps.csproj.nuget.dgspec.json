@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Клонированные репозитории\\MapsProject\\backend\\maps\\maps.csproj": {}
+    "W:\\backend\\maps\\maps.csproj": {}
   },
   "projects": {
-    "C:\\Клонированные репозитории\\MapsProject\\backend\\maps\\maps.csproj": {
+    "W:\\backend\\maps\\maps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Клонированные репозитории\\MapsProject\\backend\\maps\\maps.csproj",
+        "projectUniqueName": "W:\\backend\\maps\\maps.csproj",
         "projectName": "maps",
-        "projectPath": "C:\\Клонированные репозитории\\MapsProject\\backend\\maps\\maps.csproj",
-        "packagesPath": "C:\\Users\\Pavel\\.nuget\\packages\\",
-        "outputPath": "C:\\Клонированные репозитории\\MapsProject\\backend\\maps\\obj\\",
+        "projectPath": "W:\\backend\\maps\\maps.csproj",
+        "packagesPath": "C:\\Users\\senya\\.nuget\\packages\\",
+        "outputPath": "W:\\backend\\maps\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Pavel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\senya\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,6 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.316\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,17 +40,16 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[6.0.29, )"
@@ -92,6 +92,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -100,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.316\\RuntimeIdentifierGraph.json"
         }
       }
     }

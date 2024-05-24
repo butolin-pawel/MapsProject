@@ -12,7 +12,7 @@ using maps.Models;
 namespace maps.Migrations
 {
     [DbContext(typeof(context))]
-    [Migration("20240522074504_migration")]
+    [Migration("20240524095551_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,14 +54,12 @@ namespace maps.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("routeid")
-                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.Property<int>("score")
                         .HasColumnType("integer");
 
                     b.Property<int?>("userid")
-                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.HasKey("id");
@@ -91,6 +89,12 @@ namespace maps.Migrations
                     b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<double>("latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("longitude")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -168,15 +172,11 @@ namespace maps.Migrations
                 {
                     b.HasOne("maps.Models.route", "route")
                         .WithMany("feedbacks")
-                        .HasForeignKey("routeid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("routeid");
 
                     b.HasOne("maps.Models.user", "user")
                         .WithMany("feedbacks")
-                        .HasForeignKey("userid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("userid");
 
                     b.Navigation("route");
 

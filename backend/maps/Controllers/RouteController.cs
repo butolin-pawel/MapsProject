@@ -13,7 +13,7 @@ namespace maps.Controllers
         private context context;
         public RouteController()
         {
-            context = new context(); 
+            context = new context();
         }
         //Получение всех маршрутов
         //Пример Request body (просто api c get curl -X 'GET' \ 'https://localhost:????/api/Route' \ -H 'accept: */*')
@@ -21,20 +21,20 @@ namespace maps.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-                var routes = context.routes.Select(r => new { r.id, r.name, r.length, r.description, r.time }).ToList();
+            var routes = context.routes.Select(r => new { r.id, r.name, r.length, r.description, r.time }).ToList();
 
-                var table = new DataTable();
-                table.Columns.Add("id", typeof(int));
-                table.Columns.Add("name", typeof(string));
-                table.Columns.Add("length", typeof(int)); 
-                table.Columns.Add("description", typeof(string));
-                table.Columns.Add("time", typeof(DateTime)); 
+            var table = new DataTable();
+            table.Columns.Add("id", typeof(int));
+            table.Columns.Add("name", typeof(string));
+            table.Columns.Add("length", typeof(int));
+            table.Columns.Add("description", typeof(string));
+            table.Columns.Add("time", typeof(DateTime));
 
-                foreach (var route in routes)
-                {
-                    table.Rows.Add(route.id, route.name, route.length, route.description, route.time);
-                }
-                return new JsonResult(table);
+            foreach (var route in routes)
+            {
+                table.Rows.Add(route.id, route.name, route.length, route.description, route.time);
+            }
+            return new JsonResult(table);
         }
 
         //Добавление маршрута
@@ -43,16 +43,16 @@ namespace maps.Controllers
         [HttpPost]
         public JsonResult Post(route r)
         {
-                var newRoute = new route
-                {
-                    name = r.name,
-                    length = r.length,
-                    description = r.description,
-                    time = r.time
-                };
-                context.routes.Add(newRoute);
-                context.SaveChanges();
-                return new JsonResult("Added Successfully");
+            var newRoute = new route
+            {
+                name = r.name,
+                length = r.length,
+                description = r.description,
+                time = r.time
+            };
+            context.routes.Add(newRoute);
+            context.SaveChanges();
+            return new JsonResult("Added Successfully");
         }
 
         //Изменение маршрута
@@ -61,20 +61,20 @@ namespace maps.Controllers
         [HttpPut]
         public JsonResult Put(route r)
         {
-                var existingRoute = context.routes.FirstOrDefault(route => route.id == r.id);
-                if (existingRoute != null)
-                {
-                    existingRoute.name = r.name;
-                    existingRoute.length = r.length;
-                    existingRoute.description = r.description;
-                    existingRoute.time = r.time;
-                    context.SaveChanges();
-                    return new JsonResult("Updated Successfully");
-                }
-                else
-                {
-                    return new JsonResult("Route not found");
-                }
+            var existingRoute = context.routes.FirstOrDefault(route => route.id == r.id);
+            if (existingRoute != null)
+            {
+                existingRoute.name = r.name;
+                existingRoute.length = r.length;
+                existingRoute.description = r.description;
+                existingRoute.time = r.time;
+                context.SaveChanges();
+                return new JsonResult("Updated Successfully");
+            }
+            else
+            {
+                return new JsonResult("Route not found");
+            }
         }
 
         //Удаление маршрута
@@ -83,18 +83,18 @@ namespace maps.Controllers
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
-                var routeToDelete = context.routes.FirstOrDefault(route => route.id == id);
+            var routeToDelete = context.routes.FirstOrDefault(route => route.id == id);
 
-                if (routeToDelete != null)
-                {
-                    context.routes.Remove(routeToDelete);
-                    context.SaveChanges();
-                    return new JsonResult("Deleted Successfully");
-                }
-                else
-                {
-                    return new JsonResult("Route not found");
-                }
+            if (routeToDelete != null)
+            {
+                context.routes.Remove(routeToDelete);
+                context.SaveChanges();
+                return new JsonResult("Deleted Successfully");
+            }
+            else
+            {
+                return new JsonResult("Route not found");
+            }
         }
     }
 }
