@@ -21,6 +21,7 @@
     "@fortawesome/angular-fontawesome": "^0.14.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "angular-osm": "^1.2.2",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "ngx-toastr": "^18.0.0",

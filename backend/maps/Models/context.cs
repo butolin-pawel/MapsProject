@@ -5,7 +5,7 @@ namespace maps.Models
 {
     public class context : DbContext
     {
-        public static string connectionString = "Server=127.0.0.1;Port=5432;Database=K;User Id=postgres;Password=123;";
+        public static string connectionString = "Server=127.0.0.1;Port=5432;Database=K;User Id=postgres;Password=Vq2R8FJ;";
         public DbSet<admin> admins { get; set; }
         public DbSet<user> users { get; set; }
         public DbSet<feedback> feedbacks { get; set; }
