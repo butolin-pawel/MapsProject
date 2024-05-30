@@ -25,9 +25,9 @@
           <p>Название : {{rot.name}}</p>
           <p *ngIf="rot.paid">Платный</p>
           <p *ngIf="!rot.paid">Бесплатный</p>
-          <p>Продолжительность : {{rot.during}}</p>
+          <p>Продолжительность : {{rot.length}}</p>
         </div>
-          <button class=" rounded-lg h-14 my-auto ml-auto bg-yellow-400 p-4">Начать</button>
+          <a [routerLink]="['/']" [queryParams]="{ rut: rot.id }" routerLinkActive="active-link" class="rounded-lg h-14 my-auto ml-auto bg-yellow-400 p-4">Начать</a>
         </div>
       </div>
     </div>

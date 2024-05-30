@@ -1,28 +1,45 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MapService } from '../map.service';
 import * as L from 'leaflet';
-import { RouteService } from '../route.service';
+import { RouteService } from '../service/route.service';
 import 'leaflet-routing-machine';
 import { BrowserModule } from '@angular/platform-browser';
 import { delay } from 'rxjs';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons/faLocationArrow';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { PlaceService } from '../service/place.service';
+import { Route } from '../class/route';
+import { Place } from '../class/place';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [ ToastrModule],
+  imports: [ ToastrModule,CommonModule, FormsModule],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
 export class MapComponent {
   @ViewChild('map') mapElement!: ElementRef;
 
-  constructor(private mapService: MapService, private routeService : RouteService, private toast : ToastrService) { }
+  constructor(private mapService: MapService, private routeService : RouteService, private toast : ToastrService,private placeService : PlaceService,private route : ActivatedRoute,private router: Router) {
+    this.rut  =  route.snapshot.queryParams['rut'];
+
+   }
+   rut : number;
   private map!: L.Map;
   private userMarker!: L.Marker;
   marker: any;
   watchId! : number;
   way : any;
+  listPlaces : Place[] = [];
+  creationRoutesPlace : number[] = [];
+  finishCreate : boolean = false;
+  nameNewRoute : string = '';
+  descNewRoute : string = '';
+  action : string = 'choose';
+  placesInRoute : any[] = [];
   private userIcon = L.icon({
     iconUrl: '../../assets/circle-regular.svg', // путь к вашему изображению иконки
     iconSize: [50, 50], // размер иконки
@@ -44,12 +61,36 @@ export class MapComponent {
 
   ngAfterViewInit(){
     this.initializeMap();
+    if(this.rut){
+        this.routeStart(this.rut);
+        this.action = 'walking';
+    }
+    else{
+      this.placeService.getAllPlace().subscribe((res)=>{
+        this.listPlaces = res;
+        this.showPlaces();
+      });
+    }
   }
   ngOnDestroy(): void {
     // Остановка отслеживания позиции при уничтожении компонента
     if (this.watchId) {
       navigator.geolocation.clearWatch(this.watchId);
     }
+  }
+  showPlaces(){
+      this.listPlaces.forEach(elem =>{
+        this.addMarkers(elem);
+      })
+  }
+  changeAction(act : string){
+    this.action = act;
+    if(act === 'creating' || act === 'addPlace' || act === 'choose')
+      {
+        this.map.on('click', (e) => {
+          this.onMapClick(e);
+        });
+      }
   }
   getPosition(): Promise<GeolocationPosition> {
     return new Promise((resolve, reject) => {
@@ -73,11 +114,6 @@ export class MapComponent {
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
       })
       .addTo(this.map);
-
-      this.map.on('click', (e) => {
-        this.onMapClick(e);
-      });
-
       this.addUserMarker(pos.coords.latitude,pos.coords.longitude);
     })
     .catch(err => {
@@ -86,11 +122,22 @@ export class MapComponent {
 
   }
 
-  addMarkers(lat : number, lng : number, comm : string): void {
+  addMarkers(elem : Place): void {
+    const pointBlock = document.createElement('div');
     const descriptionPoint =  document.createElement('p');
-    descriptionPoint.append(comm);
+    descriptionPoint.append(elem.name+'\n'+elem.description+'\n'+elem.adress);
     descriptionPoint.className = "text-lg text-wrap"
-    L.marker([lat, lng]).bindPopup(descriptionPoint).addTo(this.map);
+    const addToRoute = document.createElement('button');
+    addToRoute.innerHTML = "Добавить в маршрут";
+    addToRoute.onclick = () =>{
+      if(this.action === 'creating')
+        this.addToRoute(elem);
+    };
+    pointBlock.appendChild(descriptionPoint);
+    pointBlock.appendChild(addToRoute);
+    let point =  L.marker([elem.latitude, elem.longitude]).bindPopup(pointBlock);
+    this.placesInRoute.push(point);
+    point.addTo(this.map);
   }
 
   onMapClick(e: any) {
@@ -103,21 +150,23 @@ export class MapComponent {
 
     // Обработка клика на карту
     this.marker = L.marker(e.latlng).addTo(this.map);
-
     const buttonContainer = document.createElement('div');
     buttonContainer.className = "flex flex-col text-lg "
 
     // Создание кнопок
     const addButton = document.createElement('button');
-    addButton.innerHTML = 'Добавить в маршрут';
+    addButton.innerHTML = 'Ввести данные';
     addButton.onclick = () => {
-      this.addToRoute(e.latlng);
+      this.map.removeLayer(this.marker);
+      this.marker = null;
+      this.openForm(e);
     };
 
     const cancelButton = document.createElement('button');
     cancelButton.innerHTML = 'Отмена';
     cancelButton.onclick = () => {
       this.map.removeLayer(this.marker);
+      this.marker = null;
     };
 
     buttonContainer.append(addButton);
@@ -125,9 +174,62 @@ export class MapComponent {
     // Добавление кнопок над маркером
     this.marker.bindPopup(buttonContainer).openPopup();
   }
+  openForm(e : any){
+    this.marker = L.marker(e.latlng).addTo(this.map);
+    const placeInfo = document.createElement('div');
+placeInfo.className = "flex flex-col text-lg";
 
+// Создание поля ввода для имени
+const nameInput = document.createElement('input');
+nameInput.id = "place-name"; // Уникальный id
+nameInput.name = "name"; // Уникальный name
+nameInput.placeholder = "Название места";
+nameInput.autocomplete = "off"; // Добавление атрибута autocomplete
+
+// Создание поля ввода для адреса
+const addressInput = document.createElement('input');
+addressInput.id = "place-address"; // Уникальный id
+addressInput.name = "address"; // Уникальный name
+addressInput.placeholder = "Адрес";
+addressInput.autocomplete = "street-address"; // Добавление атрибута autocomplete
+
+// Создание текстовой области для описания
+const descInput = document.createElement('textarea');
+descInput.id = "place-description"; // Уникальный id
+descInput.name = "description"; // Уникальный name
+descInput.placeholder = "Описание";
+descInput.autocomplete = "off"; // Добавление атрибута autocomplete
+
+// Создание кнопки подтверждения
+const confirmButton = document.createElement('button');
+confirmButton.id = "confirm-button"; // Уникальный id
+confirmButton.name = "confirm"; // Уникальный name
+confirmButton.innerHTML = 'Добавить';
+confirmButton.type = "button"; // Убедитесь, что это кнопка, а не отправка формы
+    confirmButton.onclick = () => {
+      // Ensure `e` is passed correctly if it's used for coordinates
+      let pl = new Place();
+      pl.dateofcreation = new Date();
+      // Assume `this` is bound correctly, otherwise pass `e` as a parameter to this function
+      pl.latitude = e.latlng.lat;
+      pl.longitude = e.latlng.lng;
+      pl.adress = addressInput.value; // Corrected spelling from `adress`
+      pl.name = nameInput.value;
+      pl.description = descInput.value;
+      this.addPlace(pl);
+    };
+
+    // Append elements to placeInfo div
+    placeInfo.appendChild(nameInput);
+    placeInfo.appendChild(addressInput);
+    placeInfo.appendChild(descInput);
+    placeInfo.appendChild(confirmButton); // Append the button
+
+    // Bind the popup to the marker and open it
+    this.marker.bindPopup(placeInfo).openPopup();
+
+  }
   createRoute(route : L.LatLng[]): void {
-
     this.way = L.Routing.control({
       waypoints: route,
       routeWhileDragging: true,
@@ -146,35 +248,97 @@ export class MapComponent {
     });
     this.way.addTo(this.map);
   }
-
-  addToRoute(latlng: any) {
-    this.map.removeLayer(this.marker);
-    this.marker = null;
-    console.log('Added to route:', latlng);
-    this.routeService.addPoint(latlng)
+  toCreateRoute(){
+    this.finishCreate = !this.finishCreate;
+  }
+  addToRoute(place: Place) {
+    console.log('Added to route:', place);
+    this.creationRoutesPlace.push(place.id);
+    this.map.closePopup();
   }
 
-  routeStart(){
-    let route = this.routeService.getRoute();
-    this.getPosition().then((cord)=>{
-     let temp = [L.latLng(cord.coords.latitude,cord.coords.longitude)];
-     temp.push(...route);
-      this.createRoute(temp);
-      route.forEach((elem, index) =>{
-          this.addMarkers(elem.lat,elem.lng, 'Точка ' + (index+1))
-      })
-    }).catch(error =>{
+  routeStart(rutIndex : number){
+    let waypoints  : Place[] = [];
+    this.routeService.loadPlace(rutIndex).subscribe((res)=>{
+        waypoints = res;
+        this.getPosition().then((cord)=>{
+         let temp = [L.latLng(cord.coords.latitude,cord.coords.longitude)];
 
+        let toch :  L.LatLng[] = waypoints.map(a => new L.LatLng(a.latitude, a.longitude));
+         temp.push(...toch);
+          this.createRoute(temp);
+          waypoints.forEach((elem) =>{
+              this.addMarkers(elem)
+          })
+        }).catch(error =>{
+
+        })
     })
   }
   routeFinish(){
-    this.toast.success("Сасибо за прохождение маршрута")
-    this.map.removeLayer(this.way);
+    this.toast.success("Сасибо за прохождение маршрута");
+    this.action = 'choose'
+    this.map.removeControl(this.way);
+    this.placesInRoute.forEach(elem => {
+      this.map.removeLayer(elem);
+    })
+    this.placeService.getAllPlace().subscribe((res)=>{
+      this.listPlaces = res;
+      this.showPlaces();
+    });
+    this.router.navigate([], {
+      queryParams: {}
+    });
+
+  }
+  addPlace(place : Place){
+    console.log('Added to route:', place);
+    this.placeService.savePlace(place).subscribe(()=>{
+      this.map.removeLayer(this.marker);
+      this.marker = null;
+      this.addMarkers(place);
+      this.action = 'choose';
+      this.map.on('click', (e) => {
+        this.onMapClick(e);
+      });
+      this.toast.success("Место успешно добавлено")
+    }, error =>{
+      this.toast.error('Ошибка добавления');
+      console.log(error);
+
+    });
+
+
+  }
+  saveRoute(){
+     this.map.on('click',(e) => {
+      this.onMapClick(e);
+    });
+
+    let tm = new Route();
+    tm.description = this.descNewRoute;
+    tm.id = this.routeService.routes.length+1;
+    tm.length =466;
+    tm.paid = false;
+    tm.name = this.nameNewRoute;
+    this.routeService.saveRoute(tm).subscribe((res)=>{
+      this.routeService.applyPlaceToRoute(res,this.creationRoutesPlace).subscribe(()=>{
+        this.routeService.routes.push(tm);
+        this.action = 'choose';
+        this.toast.success("Маршрут сохранён");
+        this.finishCreate = !this.finishCreate;
+      }, error =>{
+        console.log(error);
+        this.toast.error("Ошибка добавления");
+      })
+    }, error =>{
+      console.log(error);
+      this.toast.error("Ошибка добавления");
+    })
   }
   removeMarker(marker: any) {
     this.map.removeLayer(marker);
   }
-
   private addUserMarker(lat: number, lng: number): void {
     this.userMarker = L.marker([lat, lng]).setIcon(this.userIcon).addTo(this.map);
   }

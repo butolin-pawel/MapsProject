@@ -41,7 +41,7 @@ namespace maps.Controllers
         //Пример Request body { "name": "Маршрут1", "length": 50, "description": "Крутой", "time": "2024-05-22T09:47:57.378Z"}
         //Response body "Added Successfully"
         [HttpPost]
-        public JsonResult Post(route r)
+        public int Post(route r)
         {
             var newRoute = new route
             {
@@ -51,8 +51,9 @@ namespace maps.Controllers
                 time = r.time
             };
             context.routes.Add(newRoute);
+            
             context.SaveChanges();
-            return new JsonResult("Added Successfully");
+            return context.routes.OrderBy(a =>a.id).Last().id;
         }
 
         //Изменение маршрута
