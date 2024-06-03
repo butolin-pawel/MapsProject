@@ -1,0 +1,10 @@
+<div class="flex">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <fa-icon
+    [icon]="starIcon"
+      class=""
+      [class.text-yellow-500]="i < rating"
+      (click)="selectRating(i + 1)"
+      ></fa-icon>
+    </ng-container>
+  </div>

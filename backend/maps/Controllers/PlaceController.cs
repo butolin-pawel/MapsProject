@@ -43,7 +43,7 @@ namespace maps.Controllers
         //Пример Request body { "name": "Площадь", "adress": "Московская 1", "description": "проб", "dateofcreation": "2024-05-22T09:34:03.914Z"} пример без longitude и latitude
         //Response body "Added Successfully"
         [HttpPost]
-        public JsonResult Post([FromBody] place p)
+        public int Post([FromBody] place p)
         {
             var newPlace = new place
             {
@@ -56,7 +56,7 @@ namespace maps.Controllers
             };
             context.places.Add(newPlace);
             context.SaveChanges();
-            return new JsonResult("Added Successfully");
+            return context.places.OrderBy(a => a.id).Last().id;
         }
 
         //Редактирование места

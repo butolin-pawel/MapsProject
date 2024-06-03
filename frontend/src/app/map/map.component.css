@@ -1,5 +1,5 @@
-.leaflet-control-route {
-  display: none;
+.leaflet-control{
+  visibility: hidden;
 }
 .leaflet-routing-container {
   display: none;

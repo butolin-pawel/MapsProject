@@ -20,15 +20,16 @@
           </div>
         </div>
         <div class=" space-y-1">
-        <div *ngFor="let rot of list" class="border rounded-lg border-black p-4 flex flex-row">
+        <div (click)="routeInfo(rot)"  *ngFor="let rot of list" class="border rounded-lg border-black p-4 flex flex-row hover:bg-yellow-100">
           <div>
           <p>Название : {{rot.name}}</p>
           <p *ngIf="rot.paid">Платный</p>
           <p *ngIf="!rot.paid">Бесплатный</p>
           <p>Продолжительность : {{rot.length}}</p>
         </div>
-          <a [routerLink]="['/']" [queryParams]="{ rut: rot.id }" routerLinkActive="active-link" class="rounded-lg h-14 my-auto ml-auto bg-yellow-400 p-4">Начать</a>
+          <a [routerLink]="['/']" [queryParams]="{ rut: rot.id }" routerLinkActive="active-link" class="rounded-lg h-14 my-auto ml-auto bg-yellow-400 p-4 hover:scale-105">Начать</a>
         </div>
       </div>
     </div>
 </div>
+<app-route-modal *ngIf="isModal" [route]="modalRoute" (closeModal)="closeModal()" class="fixed top-0 left-0 z-50"></app-route-modal>

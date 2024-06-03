@@ -1,0 +1,22 @@
+<div class="w-screen h-screen fixed bg-gray-500 bg-opacity-45 flex">
+  <div class="w-1/3 h-fit p-4 bg-white m-auto flex-col flex rounded-lg border border-black">
+      <fa-icon (click)="closeEmit()" [icon]="close" class="text-3xl ml-auto hover:scale-105"> </fa-icon>
+      <p>Маршрут {{route.name}}</p>
+      <p>Описание: {{route.description}}</p>
+      <p *ngIf="route.paid">Платный</p>
+      <p *ngIf="!route.paid">Бесплатный</p>
+      <p>Продолжительность : {{route.length}}</p>
+      <p>Отзывы</p>
+      <div class="overflow-y-scroll">
+        <div class="border rounded-lg my-2 p-2" *ngFor="let feed of feedBacks">
+            <p>
+              Аноним
+            </p>
+            <div class="flex flex-row">
+                <p>{{feed.description}}</p>
+                <app-starrating  [maxRating]="5" [initialRating]="feed.score" [interactive]="false" class="ml-auto text-3xl"></app-starrating>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

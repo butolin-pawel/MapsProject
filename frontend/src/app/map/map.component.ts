@@ -13,29 +13,36 @@ import { PlaceService } from '../service/place.service';
 import { Route } from '../class/route';
 import { Place } from '../class/place';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { FeedbackService } from '../service/feedback.service';
+import { Feedback } from '../class/feedback';
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [ ToastrModule,CommonModule, FormsModule],
+  imports: [ ToastrModule,CommonModule, FormsModule,StarRatingComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
 export class MapComponent {
   @ViewChild('map') mapElement!: ElementRef;
 
-  constructor(private mapService: MapService, private routeService : RouteService, private toast : ToastrService,private placeService : PlaceService,private route : ActivatedRoute,private router: Router) {
+  constructor(private mapService: MapService, private routeService : RouteService, private toast : ToastrService,private placeService : PlaceService,private route : ActivatedRoute,private router: Router,private feedService : FeedbackService) {
     this.rut  =  route.snapshot.queryParams['rut'];
 
    }
-   rut : number;
+  rut : number;
+  fillFeedBack : boolean = false;
   private map!: L.Map;
   private userMarker!: L.Marker;
   marker: any;
+  score : number = 1;
+  feedBackText : string = "";
   watchId! : number;
   way : any;
   listPlaces : Place[] = [];
   creationRoutesPlace : number[] = [];
   finishCreate : boolean = false;
+  feedBack : boolean = false;
   nameNewRoute : string = '';
   descNewRoute : string = '';
   action : string = 'choose';
@@ -66,10 +73,7 @@ export class MapComponent {
         this.action = 'walking';
     }
     else{
-      this.placeService.getAllPlace().subscribe((res)=>{
-        this.listPlaces = res;
-        this.showPlaces();
-      });
+      this.showPlaces();
     }
   }
   ngOnDestroy(): void {
@@ -79,9 +83,13 @@ export class MapComponent {
     }
   }
   showPlaces(){
+    this.placeService.getAllPlace().subscribe((res)=>{
+      this.listPlaces = res;
       this.listPlaces.forEach(elem =>{
         this.addMarkers(elem);
       })
+    });
+
   }
   changeAction(act : string){
     this.action = act;
@@ -276,7 +284,7 @@ confirmButton.type = "button"; // Убедитесь, что это кнопка
     })
   }
   routeFinish(){
-    this.toast.success("Сасибо за прохождение маршрута");
+    this.toast.success("Сасибо за прохождение маршрута <3!!");
     this.action = 'choose'
     this.map.removeControl(this.way);
     this.placesInRoute.forEach(elem => {
@@ -286,16 +294,53 @@ confirmButton.type = "button"; // Убедитесь, что это кнопка
       this.listPlaces = res;
       this.showPlaces();
     });
+    this.feedBack = !this.feedBack;
     this.router.navigate([], {
       queryParams: {}
     });
 
   }
+  cancelFeedback(){
+    this.feedBack = !this.feedBack;
+  }
+  acceptFeedback(){
+    this.fillFeedBack = !this.fillFeedBack;
+  }
+  sendFeedBack(){
+    let feed : Feedback = new Feedback();
+    feed.description = this.feedBackText;
+    feed.routeid = this.rut;
+    feed.score = this.score;
+    // feed. а тут мы проверяем вошёл ли юзер но этого не будет никогда
+
+    this.feedService.saveFeedBack(feed).subscribe(()=>{
+      this.toast.success("Спасибо за отзыв")
+      this.feedBack = !this.feedBack;
+      this.fillFeedBack = !this.fillFeedBack;
+    }, error =>{
+      console.log(error);
+      this.toast.error("Ошибка отправки отзыва")
+
+    })
+  }
+  onRatingChange(newRating: number) {
+    this.score = newRating;
+  }
+  centerOnMe(){
+    this.getPosition().then( pos => {
+      let center = { lat: pos.coords.latitude, lng: pos.coords.longitude};
+      this.map.setView(center,16);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  }
   addPlace(place : Place){
     console.log('Added to route:', place);
-    this.placeService.savePlace(place).subscribe(()=>{
+    this.placeService.savePlace(place).subscribe((res)=>{
       this.map.removeLayer(this.marker);
       this.marker = null;
+      place.id = res;
       this.addMarkers(place);
       this.action = 'choose';
       this.map.on('click', (e) => {
