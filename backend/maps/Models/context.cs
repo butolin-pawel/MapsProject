@@ -5,7 +5,7 @@ namespace maps.Models
 {
     public class context : DbContext
     {
-        public static string connectionString = "Server=127.0.0.1;Port=5432;Database=K;User Id=postgres;Password=Vq2R8FJ;";
+        public static string connectionString;
         public DbSet<admin> admins { get; set; }
         public DbSet<user> users { get; set; }
         public DbSet<feedback> feedbacks { get; set; }
@@ -14,10 +14,19 @@ namespace maps.Models
         public context() : base()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            context.connectionString = "Server=127.0.0.1;Port=5432;Database=K;User Id=postgres;Password=Vq2R8FJ;";
+        }
+        public context(DbContextOptions<context> options) : base(options)
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseNpgsql(connectionString);
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                builder.UseNpgsql(connectionString);
+            }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

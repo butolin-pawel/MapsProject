@@ -10,10 +10,11 @@ namespace maps.Controllers
     [ApiController]
     public class RouteController : ControllerBase
     {
-        private context context;
-        public RouteController()
+        private readonly context context;
+
+        public RouteController(context context)
         {
-            context = new context();
+            this.context = context;
         }
         //Получение всех маршрутов
         //Пример Request body (просто api c get curl -X 'GET' \ 'https://localhost:????/api/Route' \ -H 'accept: */*')
